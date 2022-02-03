@@ -38,19 +38,37 @@ public class ApiController {
             return ResponseEntity.ok(msg);
     }
 
-    @PostMapping("/login")
-    public String loginUser(@RequestBody User user) {
-        User oAuthUser = userRepository.findByEmail(user.getEmail()).get();
-//        System.out.println(oAuthUser.getPassword() + " && " + user.getPassword() );
-        if(oAuthUser == null) {
-            return "Invalid Credentials";
-        }else{
-            if(user.getPassword().contentEquals(oAuthUser.getPassword())) {
-                return "Login Successful";
-            }else{
-                return "Invalid Credentials";
-            }
-        }
+//    @PostMapping("/login")
+//    public String loginUser(@RequestBody User user) {
+//        User oAuthUser = userRepository.findByEmail(user.getEmail()).get();
+////        System.out.println(oAuthUser.getPassword() + " && " + user.getPassword() );
+//        if(oAuthUser == null) {
+//            return "Invalid Credentials";
+//        }else{
+//            if(user.getPassword().contentEquals(oAuthUser.getPassword())) {
+//                return "Login Successful";
+//            }else{
+//                return "Invalid Credentials";
+//            }
+//        }
+//    }
+    @RequestMapping("/login")
+    public String loginPage(){
+        return "Login Page";
     }
 
+    @RequestMapping(value = "/login-success", method = RequestMethod.GET)
+    public String loginSuccessPage() {
+        return "Login SuccessFul";
+    }
+
+    @RequestMapping("/logout")
+    public String logoutPage(){
+        return "Processing Logout";
+    }
+
+    @RequestMapping("/logout-success")
+    public String logoutSuccessPage() {
+        return "Logout SuccessFul";
+    }
 }
